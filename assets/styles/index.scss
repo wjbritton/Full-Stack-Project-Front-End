@@ -24,6 +24,10 @@ ul {
   text-align: center;
 }
 
+p {
+  font-weight: 700;
+}
+
 .hidden {
   display: none;
   padding: 10%;
@@ -31,10 +35,10 @@ ul {
  }
 
 .right-btn {
-  font-size: 2em;
+  font-size: 1em;
   font-weight: 700;
   height: 3em;
-  width: 25%;
+  padding: .5em;
 }
 
 .center {
@@ -43,6 +47,7 @@ ul {
 
 .submit {
   background-color: $white;
+  border: .5em;
   font-size: 3em;
   font-weight: 700;
 }

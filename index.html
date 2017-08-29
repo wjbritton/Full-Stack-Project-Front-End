@@ -9,9 +9,13 @@
 </head>
 <body>
 
+  <div id="actionBtn">
+    <button id="admin-register" class="right-btn btn">Admin Register</button>
+    <button id="admin-login" class="right-btn btn">Admin Login</button>
+  </div>
+
     <!--Landing Page-->
     <div id="landingPage" class="center">
-        <div id="adminBtn"><button id="admin-login" class="right-btn btn">Admin Login</button></div>
         <h1>Please Enter Model Number</h1>
         <br>
         <h4>Model number can be found on the name plate of the plow.</h4>
@@ -23,16 +27,35 @@
         <input type="submit" value="submit" id="submitModelNum" class="submit btn" required>
     </div>
 
-    <!--Admin Login-->
+    <!--Admin Signup-->
     <div id="admin" class="center hidden">
-        <div id="home-btn"><button class="home right-btn btn">Back home</button></div>
-        <h1>Register</h1>
+        <div><button class="home right-btn btn">Back home</button></div>
+        <h1>Register (admin only)</h1>
         <p>User Name</p><input type="text" id="emailReg" name="userName" required>
         <br>
-        <p>Password</p><input type="text" id="passwordReg" name="Password" required>
+        <p>Password</p><input type="password" id="passwordReg" name="Password" required>
         <br>
         <br>
         <input type="submit" name="submit" id="adminButton" class="submit" required>
+    </div>
+
+    <!--Admin Login-->
+    <div id="adminSignIn" class="center hidden">
+        <div><button class="home right-btn btn">Back home</button></div>
+        <h1>Login</h1>
+        <p>User Name</p><input type="text" id="emailLog" name="userName" required>
+        <br>
+        <p>Password</p><input type="password" id="passwordLog" name="Password" required>
+        <br>
+        <br>
+        <input type="submit" name="submit" id="signIn" class="submit" required>
+    </div>
+
+    <!-- Add Delete Button -->
+    <div id="crudAdmin" class="center hidden">
+      <button id="add" class="btn">Add Plow</button>
+      <button id="delete" class="btn">Delete Plow</button>
+      <button id="edit" class="btn">Edit Plow</button>
     </div>
 
     <!--Search Result-->
@@ -40,12 +63,15 @@
         <div class="right-btn"><button class="home btn">Back home</button></div>
         <div>
             <ul>
-                <li id="run_time">Last Run:</li>
-                <li id="year">Year Make:</li>
-                <li id="model">Model:</li>
+                <p>Last Run: </p><li id="run_time"></li>
+                <p>Year Make: </p><li id="year"></li>
+                <p>Model: </p><li id="model"></li>
             </ul>
         </div>
       </div>
+
+
+    <div
 
 </body>
 </html>
