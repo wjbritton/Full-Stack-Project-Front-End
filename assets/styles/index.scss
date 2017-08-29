@@ -1,2 +1,48 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+$yellow: #ff0;
+$white: #fff;
+
+body {
+  background-color: $yellow;
+}
+
+h1 {
+  font-size: 4em;
+  font-weight: 700;
+}
+
+h4 {
+  font-style: italic;
+  font-weight: 700;
+}
+
+ul {
+  font-size: 32px;
+  list-style: none;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+  padding: 10%;
+  vertical-align: middle;
+ }
+
+.right-btn {
+  font-size: 2em;
+  font-weight: 700;
+  height: 3em;
+  width: 25%;
+}
+
+.center {
+  text-align: center;
+}
+
+.submit {
+  background-color: $white;
+  font-size: 3em;
+  font-weight: 700;
+}

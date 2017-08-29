@@ -1,25 +1,51 @@
 <!DOCTYPE html>
-<html>
-    <head>
-      <title>Example</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+<head>
+  <title>Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Do not add `script` tags-->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
+<body>
 
-      <!-- Do not add `link` tags-->
-      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <!--Landing Page-->
+    <div id="landingPage" class="center">
+        <div id="adminBtn"><button id="admin-login" class="right-btn btn">Admin Login</button></div>
+        <h1>Please Enter Model Number</h1>
+        <br>
+        <h4>Model number can be found on the name plate of the plow.</h4>
+        <br>
+        <br>
+        <input type="text" name="model_number" id="model-input" class="btn" required>
+        <br>
+        <br>
+        <input type="submit" value="submit" id="submitModelNum" class="submit btn" required>
+    </div>
 
-      <!-- Do not add `script` tags-->
-      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-    <body class="container-fluid">
-      <h1>Example</h1>
+    <!--Admin Login-->
+    <div id="admin" class="center hidden">
+        <div id="home-btn"><button class="home right-btn btn">Back home</button></div>
+        <h1>Register</h1>
+        <p>User Name</p><input type="text" id="emailReg" name="userName" required>
+        <br>
+        <p>Password</p><input type="text" id="passwordReg" name="Password" required>
+        <br>
+        <br>
+        <input type="submit" name="submit" id="adminButton" class="submit" required>
+    </div>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
-    </body>
+    <!--Search Result-->
+    <div id="results" class="center hidden">
+        <div class="right-btn"><button class="home btn">Back home</button></div>
+        <div>
+            <ul>
+                <li id="run_time">Last Run:</li>
+                <li id="year">Year Make:</li>
+                <li id="model">Model:</li>
+            </ul>
+        </div>
+      </div>
+
+</body>
 </html>
