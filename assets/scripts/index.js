@@ -100,7 +100,6 @@ $('#signIn').on('click', function () {
   })
 })
 
-
 $('#signIn').on('click', function () {
   const valEmail = $('#emailLog').val()
   const valPw = $('#passwordLog').val()
