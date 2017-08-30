@@ -36,7 +36,7 @@ $('#submitModelNum').on('click', function () {
     type: 'GET',
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
-    url: 'http://localhost:4741/plows/' + input,
+    url: 'https://rocky-caverns-21242.herokuapp.com/plows/' + input,
     success: function (response) {
       console.log(response)
       $('#run_time').html(response.plow.last_run_time)
@@ -60,7 +60,7 @@ $('#adminButton').on('click', function () {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: jsonData,
-    url: 'http://localhost:4741/sign-up',
+    url: 'https://rocky-caverns-21242.herokuapp.com/sign-up',
     success: function () {
       $('#emailReg').val('')
       $('#passwordReg').val('')
@@ -81,7 +81,7 @@ $('#signIn').on('click', function () {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: jsonData,
-    url: 'http://localhost:4741/sign-in',
+    url: 'https://rocky-caverns-21242.herokuapp.com/sign-in',
     success: function (data, textStatus, jqXhr) {
       console.log(data)
       console.log(textStatus)
@@ -110,7 +110,7 @@ $('#signIn').on('click', function () {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: jsonData,
-    url: 'http://localhost:4741/sign-in',
+    url: 'https://rocky-caverns-21242.herokuapp.com/sign-in',
     success: function (data, textStatus, jqXhr) {
       console.log(data)
       console.log(textStatus)
