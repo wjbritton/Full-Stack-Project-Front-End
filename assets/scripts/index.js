@@ -3,16 +3,21 @@
 // const setAPIOrigin = require('../../lib/set-api-origin')
 // const config = require('./config')
 
+let loggedIn = 0
+let userId, token
+
 $('#admin-register').on('click', function () {
   $('#landingPage').addClass('hidden')
   $('#admin').removeClass('hidden')
   $('#actionBtn').addClass('hidden')
+  $('#results').addClass('hidden')
 })
 
 $('#admin-login').on('click', function () {
   $('#landingPage').addClass('hidden')
   $('#adminSignIn').removeClass('hidden')
   $('#actionBtn').addClass('hidden')
+  $('#results').addClass('hidden')
 })
 
 $('.home').on('click', function () {
@@ -37,15 +42,21 @@ $('#submitModelNum').on('click', function () {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     url: 'http://localhost:4741/plows/' + input,
-    success: function (response) {
+    success: function (response, textStatus, jqXhr) {
       console.log(response)
-      $('#run_time').html(response.plow.last_run_time)
-      $('#year').html(response.plow.year_make)
-      $('#model').html(response.plow.model)
-      console.log('Registered')
-      $('#results').removeClass('hidden')
-      $('#landingPage').addClass('hidden')
-      $('#model-input').val('')
+      if (jqXhr.readyState === 4 && jqXhr.status === 200) {
+        $('#run_time').html(response.plow.last_run_time)
+        $('#year').html(response.plow.year_make)
+        $('#model').html(response.plow.model)
+        console.log('Registered')
+        $('#results').removeClass('hidden')
+        $('#landingPage').addClass('hidden')
+        if (loggedIn === 1) {
+          $('#crudAdmin').removeClass('hidden')
+          $('#addPlow').addClass('hidden')
+        }
+        $('#model-input').val('')
+      }
     }
   })
 })
@@ -86,13 +97,16 @@ $('#signIn').on('click', function () {
       console.log(data)
       console.log(textStatus)
       console.log(jqXhr)
+      userId = JSON.parse(jqXhr.responseText).user.id
+      token = JSON.parse(jqXhr.responseText).user.token
       if (jqXhr.readyState === 4 && jqXhr.status === 200) {
         $('#emailReg').val('')
         $('#passwordReg').val('')
         $('#landingPage').removeClass('hidden')
-        $('#crudAdmin').removeClass('hidden')
         $('#adminSignIn').addClass('hidden')
+        $('#addPlow').removeClass('hidden')
         console.log('Signed In')
+        loggedIn = 1
       } else {
         console.log('error')
       }
@@ -100,35 +114,27 @@ $('#signIn').on('click', function () {
   })
 })
 
-$('#signIn').on('click', function () {
+$('#logOut').on('click', function () {
   const valEmail = $('#emailLog').val()
   const valPw = $('#passwordLog').val()
   const jsonData = '{ "credentials": { "email": "' + valEmail + '", "password": "' + valPw + '" }}'
   console.log(jsonData)
   $.ajax({
-    type: 'POST',
+    type: 'DELETE',
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: jsonData,
-    url: 'http://localhost:4741/sign-in',
-    success: function (data, textStatus, jqXhr) {
-      console.log(data)
-      console.log(textStatus)
-      console.log(jqXhr)
-      if (jqXhr.readyState === 4 && jqXhr.status === 200) {
-        $('#emailReg').val('')
-        $('#passwordReg').val('')
-        $('#landingPage').removeClass('hidden')
-        $('#crudAdmin').removeClass('hidden')
-        $('#adminSignIn').addClass('hidden')
-        console.log('Signed In')
-      } else {
-        console.log('error')
-      }
+    url: 'http://localhost:4741/sign-out/' + userId,
+    headers: {
+      Authorization: 'Token token=' + token
+    },
+    success: function () {
+      $('#addPlow').addClass('hidden')
+      loggedIn = 0
+      console.log('Deleted!')
     }
   })
 })
-// delete CRUD
 
 // $('#delete').on('click', function () {
 //   console.log('home click')
