@@ -28,10 +28,18 @@ $('.home').on('click', function () {
   $('#adminSignIn').addClass('hidden')
 })
 
-$('#searchAdmin').on('click', function () {
+$('#Admin').on('click', function () {
   console.log('home click')
   $('#landingPage').removeClass('hidden')
   $('#admin').addClass('hidden')
+})
+
+$('#search').on('click', function () {
+  console.log('home click')
+  $('#landingPage').removeClass('hidden')
+  $('#addPlow').removeClass('hidden')
+  $('#crudAdmin').addClass('hidden')
+  $('#results').addClass('hidden')
 })
 
 $('#submitModelNum').on('click', function () {
@@ -135,6 +143,7 @@ $('#logOut').on('click', function () {
     }
   })
 })
+
 
 // $('#delete').on('click', function () {
 //   console.log('home click')
