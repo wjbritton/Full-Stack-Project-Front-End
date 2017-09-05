@@ -102,14 +102,11 @@ $('#signIn').on('click', function () {
     data: jsonData,
     url: 'http://localhost:4741/sign-in',
     success: function (data, textStatus, jqXhr) {
-      console.log(data)
-      console.log(textStatus)
-      console.log(jqXhr)
+      $('#emailLog').val('')
+      $('#passwordLog').val('')
       userId = JSON.parse(jqXhr.responseText).user.id
       token = JSON.parse(jqXhr.responseText).user.token
       if (jqXhr.readyState === 4 && jqXhr.status === 200) {
-        $('#emailReg').val('')
-        $('#passwordReg').val('')
         $('#landingPage').removeClass('hidden')
         $('#adminSignIn').addClass('hidden')
         $('#addPlow').removeClass('hidden')
@@ -138,6 +135,7 @@ $('#logOut').on('click', function () {
     },
     success: function () {
       $('#addPlow').addClass('hidden')
+      $('#actionBtn').removeClass('hidden')
       loggedIn = 0
       console.log('Deleted!')
     }
