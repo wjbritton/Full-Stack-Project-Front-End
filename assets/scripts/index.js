@@ -4,7 +4,7 @@
 // const config = require('./config')
 
 let loggedIn = 0
-let userId, token
+let userId, token, plowId
 
 $('#admin-register').on('click', function () {
   $('#landingPage').addClass('hidden')
@@ -24,8 +24,16 @@ $('.home').on('click', function () {
   $('#landingPage').removeClass('hidden')
   $('#admin').addClass('hidden')
   $('#results').addClass('hidden')
-  $('#actionBtn').removeClass('hidden')
   $('#adminSignIn').addClass('hidden')
+  $('#idStats').addClass('hidden')
+  if (loggedIn === 1) {
+    console.log('1')
+    $('#actionBtn').addClass('hidden')
+    $('#addPlow').removeClass('hidden')
+  } else {
+    console.log('0')
+    $('#actionBtn').removeClass('hidden')
+  }
 })
 
 $('#Admin').on('click', function () {
@@ -45,13 +53,19 @@ $('#search').on('click', function () {
 $('#add').on('click', function () {
   console.log('Add Plow')
   $('#inputPlow').removeClass('hidden')
-  // $('#landingPage').addClass('hidden')
-  // $('#addPlow').addClass('hidden')
+  $('#landingPage').addClass('hidden')
+  $('#addPlow').addClass('hidden')
 })
 
 $('#submitModelNum').on('click', function () {
   console.log('home click')
   const input = $('#model-input').val()
+  console.log(loggedIn)
+  if (loggedIn === 1) {
+    $('.home').addClass('hidden')
+  } else {
+    $('.home').removeClass('hidden')
+  }
   $.ajax({
     type: 'GET',
     contentType: 'application/json; charset=utf-8',
@@ -149,6 +163,32 @@ $('#logOut').on('click', function () {
   })
 })
 
+$('#addPlowBtn').on('click', function () {
+  console.log('Plow Added')
+  const timeInput = $('#timeAdd').val()
+  const yearInput = $('#yearAdd').val()
+  const modelInput = $('#modelAdd').val()
+  const plowData = '{ "plows": { "last_run_time": "' + timeInput + '", "year_make": "' + yearInput + '", "model": ' + modelInput + '}}'
+  console.log(plowData + '  ' + userId)
+  $.ajax({
+    type: 'POST',
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    data: plowData,
+    url: 'http://localhost:4741/plows/',
+    success: function (data, textStatus, jqXhr) {
+      plowId = data.plow.id
+      console.log(plowId)
+      $('#inputPlow').addClass('hidden')
+      $('#idStats').removeClass('hidden')
+      $('#plowID').html(plowId)
+      $('#timeAdd').val('')
+      $('#yearAdd').val('')
+      $('#modelAdd').val('')
+    }
+  })
+})
+
 // $('#addPlow').on('click', function () {
 //   console.log('home click')
 //   const timeInput = $('#timeAdd').val()
@@ -163,16 +203,7 @@ $('#logOut').on('click', function () {
 //
 //   const plowData = '{ "plows": { "last_run_time": "' + timeInput + '", "year_make": "' + yearInput + '", "model": "' + modelAdd + "}}'"
 //   console.log(plowData)
-//   $.ajax({
-//     type: 'POST',
-//     contentType: 'application/json; charset=utf-8',
-//     dataType: 'json',
-//     data: plowData,
-//     url: 'http://localhost:4741/plows/2',
-//     success: function (data, textStatus, jqXhr) {
-//       console.log('Registered  ', jqXhr)
-//     }
-//   })
+//
 // })
 
 // use require with a reference to bundle the file and use it in this file

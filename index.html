@@ -77,12 +77,24 @@
       </div>
 
       <div id="inputPlow" class="center hidden">
-        <form>
-          <p>Time</p><input type="text" name="time" id="timeAdd" required>
-          <p>Year</p><input type="text" name="year" id="yearAdd" required>
-          <p>Model</p><input type="text" name="model" id="modelAdd" required>
-          <input type="submit" value="submit" id="addPlowBtn" class="submit btn" required>
-        </form>
+        <h1>Add Plow</h1>
+        <br>
+          <p>Time</p><input type="text" id="timeAdd" name="time" required>
+          <br>
+          <br>
+          <p>Year</p><input type="text" id="yearAdd" name="year" required>
+          <br>
+          <br>
+          <p>Model</p><input type="text" id="modelAdd" name="model" required>
+          <br>
+          <br>
+          <input type="submit" value="submit" id="addPlowBtn" required>
+      </div>
+
+      <div id="idStats" class="center hidden">
+        <button class="home btn">Back home</button>
+          <p>Your Plow Has Been Added</p>
+          <p>Your Plow Seach ID: <a id="plowID"></a></p>
       </div>
 
     </body>
