@@ -42,6 +42,13 @@ $('#search').on('click', function () {
   $('#results').addClass('hidden')
 })
 
+$('#add').on('click', function () {
+  console.log('Add Plow')
+  $('#inputPlow').removeClass('hidden')
+  // $('#landingPage').addClass('hidden')
+  // $('#addPlow').addClass('hidden')
+})
+
 $('#submitModelNum').on('click', function () {
   console.log('home click')
   const input = $('#model-input').val()
@@ -142,24 +149,28 @@ $('#logOut').on('click', function () {
   })
 })
 
-
-// $('#delete').on('click', function () {
+// $('#addPlow').on('click', function () {
 //   console.log('home click')
-//   const input = $('#model-input').val()
+//   const timeInput = $('#timeAdd').val()
+//   const yearInput = $('#yearAdd').val()
+//   const modelInput = $('#modelAdd').val()
+//
+//   // "plows": {
+//   //     "last_run_time": "11:00:00",
+//   //     "year_make": "2014",
+//   //     "model": "SS-8-TE"
+//   //   }
+//
+//   const plowData = '{ "plows": { "last_run_time": "' + timeInput + '", "year_make": "' + yearInput + '", "model": "' + modelAdd + "}}'"
+//   console.log(plowData)
 //   $.ajax({
-//     type: 'DELETE',
+//     type: 'POST',
 //     contentType: 'application/json; charset=utf-8',
 //     dataType: 'json',
-//     url: 'http://localhost:4741/plows/' + input,
-//     success: function (response) {
-//       console.log(response)
-//       $('#run_time').html(response.plow.last_run_time)
-//       $('#year').html(response.plow.year_make)
-//       $('#model').html(response.plow.model)
-//       console.log('Registered')
-//       $('#results').removeClass('hidden')
-//       $('#landingPage').addClass('hidden')
-//       $('#model-input').val('')
+//     data: plowData,
+//     url: 'http://localhost:4741/plows/2',
+//     success: function (data, textStatus, jqXhr) {
+//       console.log('Registered  ', jqXhr)
 //     }
 //   })
 // })

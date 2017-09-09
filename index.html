@@ -53,9 +53,9 @@
 
     <!-- User Search -->
     <div id="landingPage" class="center">
-        <h1>Please Enter Model Number</h1>
+        <h1>Please Enter Serial Number</h1>
         <br>
-        <h4>Model number can be found on the name plate of the plow.</h4>
+        <h4>Serial number can be found on the name plate of the plow.</h4>
         <br>
         <br>
         <input type="text" name="model_number" id="model-input" class="btn" required>
@@ -66,6 +66,7 @@
 
     <!--Search Result-->
     <div id="results" class="center hidden">
+      <button class="home btn">Back home</button>
         <div>
             <ul>
                 <p>Last Run: </p><li id="run_time"></li>
@@ -73,6 +74,15 @@
                 <p>Model: </p><li id="model"></li>
             </ul>
         </div>
+      </div>
+
+      <div id="inputPlow" class="center hidden">
+        <form>
+          <p>Time</p><input type="text" name="time" id="timeAdd" required>
+          <p>Year</p><input type="text" name="year" id="yearAdd" required>
+          <p>Model</p><input type="text" name="model" id="modelAdd" required>
+          <input type="submit" value="submit" id="addPlowBtn" class="submit btn" required>
+        </form>
       </div>
 
     </body>
