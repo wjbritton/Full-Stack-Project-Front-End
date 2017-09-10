@@ -78,17 +78,25 @@ $('#submitModelNum').on('click', function () {
   } else {
     $('.home').removeClass('hidden')
   }
+
+  const d = new Date()
+  let min = d.getMinutes()
+  if (min < 10) {
+    min += '0'
+  }
   $.ajax({
     type: 'GET',
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     url: 'http://localhost:4741/plows/' + input,
     success: function (response, textStatus, jqXhr) {
-      console.log(response)
+      plowId = response.plow.id
       if (jqXhr.readyState === 4 && jqXhr.status === 200) {
-        $('#run_time').html(response.plow.last_run_time)
+        const date = 'Date: ' + (1 + d.getMonth()) + '-' + d.getDate() + '-' + d.getFullYear() + '<br>' + 'Time: ' + d.getHours() + ':' + min
+        $('#timeRun').html(response.plow.last_run_time)
         $('#year').html(response.plow.year_make)
         $('#model').html(response.plow.model)
+        $('#dateLogged').html(date)
         console.log('Registered')
         $('#results').removeClass('hidden')
         $('#landingPage').addClass('hidden')
@@ -206,6 +214,8 @@ $('#changePwBtn').on('click', function () {
   const inputNew = $('#newPw').val()
   const pwData = '{"passwords": {"old": "' + inputOld + '", "new": "' + inputNew + '"}}'
   console.log(pwData + ' ' + token)
+  $('#oldPw').val('')
+  $('#newPw').val('')
   $.ajax({
     url: 'http://localhost:4741/change-password/' + userId,
     headers: {Authorization: 'Token token=' + token},
@@ -217,6 +227,37 @@ $('#changePwBtn').on('click', function () {
     }
   })
 })
+
+$('#delete').on('click', function () {
+  console.log(JSON.stringify(plowId))
+  $.ajax({
+    url: 'http://localhost:4741/plows/' + plowId,
+    headers: {
+      Authorization: 'Token token=' + token
+    },
+    method: 'DELETE'
+  })
+  // console.log(plowId)
+})
+
+// $('#changePwBtn').on('click', function () {
+//   const inputOld = $('#oldPw').val()
+//   const inputNew = $('#newPw').val()
+//   const pwData = '{"passwords": {"old": "' + inputOld + '", "new": "' + inputNew + '"}}'
+//   console.log(pwData + ' ' + token)
+//   $('#oldPw').val('')
+//   $('#newPw').val('')
+//   $.ajax({
+//     url: 'http://localhost:4741/change-password/' + userId,
+//     headers: {Authorization: 'Token token=' + token},
+//     contentType: 'application/json; charset=utf-8',
+//     type: 'PATCH',
+//     data: pwData,
+//     success: function (data, textStatus, jqXhr) {
+//       console.log('success:   ' + data + ' ' + textStatus + ' ' + jqXhr)
+//     }
+//   })
+// })
 
 // $('#addPlow').on('click', function () {
 //   console.log('home click')
