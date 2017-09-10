@@ -201,24 +201,22 @@ $('#addPlowBtn').on('click', function () {
   })
 })
 
-// $.ajax({
-//   type: 'PATCH',
-//   contentType: 'application/json; charset=utf-8',
-//   dataType: 'json',
-//   data: plowData,
-//   url: 'http://localhost:4741/plows/',
-//   success: function (data, textStatus, jqXhr) {
-//     plowId = data.plow.id
-//     console.log(plowId)
-//     $('#inputPlow').addClass('hidden')
-//     $('#idStats').removeClass('hidden')
-//     $('#plowID').html(plowId)
-//     $('#timeAdd').val('')
-//     $('#yearAdd').val('')
-//     $('#modelAdd').val('')
-//   }
-// })
-
+$('#changePwBtn').on('click', function () {
+  const inputOld = $('#oldPw').val()
+  const inputNew = $('#newPw').val()
+  const pwData = '{"passwords": {"old": "' + inputOld + '", "new": "' + inputNew + '"}}'
+  console.log(pwData + ' ' + token)
+  $.ajax({
+    url: 'http://localhost:4741/change-password/' + userId,
+    headers: {Authorization: 'Token token=' + token},
+    contentType: 'application/json; charset=utf-8',
+    type: 'PATCH',
+    data: pwData,
+    success: function (data, textStatus, jqXhr) {
+      console.log('success:   ' + data + ' ' + textStatus + ' ' + jqXhr)
+    }
+  })
+})
 
 // $('#addPlow').on('click', function () {
 //   console.log('home click')

@@ -9,23 +9,26 @@ body {
 }
 
 h1 {
-  font-size: 4em;
+  font-size: 3.5em;
   font-weight: 700;
+  padding: 0 0 4%;
 }
 
 h4 {
+  font-size: 1.5em;
   font-style: italic;
   font-weight: 700;
 }
 
 ul {
-  font-size: 32px;
+  font-size: 1.5em;
   list-style: none;
+  padding: 0 0 12%;
   text-align: center;
 }
 
 p {
-  font-size: 18px;
+  font-size: 1.5em;
   font-weight: 700;
 }
 
@@ -44,6 +47,7 @@ p {
 }
 
 .center {
+  padding: 0 0 5%;
   text-align: center;
 }
 
@@ -55,6 +59,13 @@ p {
 }
 
 .btn {
+  font-size: 18px;
   font-weight: 700;
-  margin: 5% 0 2%;
+  margin: 1%;
+  padding: 1% 2%;
+}
+
+.search,
+.home {
+  margin: 2% 0;
 }
