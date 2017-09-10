@@ -1,7 +1,10 @@
 'use strict'
 
-// const setAPIOrigin = require('../../lib/set-api-origin')
-// const config = require('./config')
+// ToDos
+
+// Change password UI and ajax
+// Change plow UI and ajax
+// Delete Plow UI and ajax
 
 let loggedIn = 0
 let userId, token, plowId
@@ -42,12 +45,13 @@ $('#Admin').on('click', function () {
   $('#admin').addClass('hidden')
 })
 
-$('#search').on('click', function () {
+$('.search').on('click', function () {
   console.log('home click')
   $('#landingPage').removeClass('hidden')
   $('#addPlow').removeClass('hidden')
   $('#crudAdmin').addClass('hidden')
   $('#results').addClass('hidden')
+  $('#inputPlow').addClass('hidden')
 })
 
 $('#add').on('click', function () {
@@ -178,7 +182,7 @@ $('#addPlowBtn').on('click', function () {
     url: 'http://localhost:4741/plows/',
     success: function (data, textStatus, jqXhr) {
       plowId = data.plow.id
-      console.log(plowId)
+      console.log(plowId + '  ' + textStatus + '  ' + JSON.stringify(jqXhr))
       $('#inputPlow').addClass('hidden')
       $('#idStats').removeClass('hidden')
       $('#plowID').html(plowId)
@@ -188,6 +192,27 @@ $('#addPlowBtn').on('click', function () {
     }
   })
 })
+
+// $('#changePw').on('click', function () {
+//   $('')
+//   $.ajax({
+//     type: 'PATCH',
+//     contentType: 'application/json; charset=utf-8',
+//     dataType: 'json',
+//     data: plowData,
+//     url: 'http://localhost:4741/plows/',
+//     success: function (data, textStatus, jqXhr) {
+//       plowId = data.plow.id
+//       console.log(plowId)
+//       $('#inputPlow').addClass('hidden')
+//       $('#idStats').removeClass('hidden')
+//       $('#plowID').html(plowId)
+//       $('#timeAdd').val('')
+//       $('#yearAdd').val('')
+//       $('#modelAdd').val('')
+//     }
+//   })
+// })
 
 // $('#addPlow').on('click', function () {
 //   console.log('home click')
