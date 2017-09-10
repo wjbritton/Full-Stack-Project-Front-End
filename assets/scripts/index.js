@@ -52,11 +52,19 @@ $('.search').on('click', function () {
   $('#crudAdmin').addClass('hidden')
   $('#results').addClass('hidden')
   $('#inputPlow').addClass('hidden')
+  $('#passwordChange').addClass('hidden')
 })
 
 $('#add').on('click', function () {
   console.log('Add Plow')
   $('#inputPlow').removeClass('hidden')
+  $('#landingPage').addClass('hidden')
+  $('#addPlow').addClass('hidden')
+})
+
+$('#changePw').on('click', function () {
+  console.log('Password Change!')
+  $('#passwordChange').removeClass('hidden')
   $('#landingPage').addClass('hidden')
   $('#addPlow').addClass('hidden')
 })
@@ -193,26 +201,24 @@ $('#addPlowBtn').on('click', function () {
   })
 })
 
-// $('#changePw').on('click', function () {
-//   $('')
-//   $.ajax({
-//     type: 'PATCH',
-//     contentType: 'application/json; charset=utf-8',
-//     dataType: 'json',
-//     data: plowData,
-//     url: 'http://localhost:4741/plows/',
-//     success: function (data, textStatus, jqXhr) {
-//       plowId = data.plow.id
-//       console.log(plowId)
-//       $('#inputPlow').addClass('hidden')
-//       $('#idStats').removeClass('hidden')
-//       $('#plowID').html(plowId)
-//       $('#timeAdd').val('')
-//       $('#yearAdd').val('')
-//       $('#modelAdd').val('')
-//     }
-//   })
+// $.ajax({
+//   type: 'PATCH',
+//   contentType: 'application/json; charset=utf-8',
+//   dataType: 'json',
+//   data: plowData,
+//   url: 'http://localhost:4741/plows/',
+//   success: function (data, textStatus, jqXhr) {
+//     plowId = data.plow.id
+//     console.log(plowId)
+//     $('#inputPlow').addClass('hidden')
+//     $('#idStats').removeClass('hidden')
+//     $('#plowID').html(plowId)
+//     $('#timeAdd').val('')
+//     $('#yearAdd').val('')
+//     $('#modelAdd').val('')
+//   }
 // })
+
 
 // $('#addPlow').on('click', function () {
 //   console.log('home click')
