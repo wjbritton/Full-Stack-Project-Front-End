@@ -5,7 +5,7 @@
 // Change password UI and ajax
 // Change plow UI and ajax
 // Delete Plow UI and ajax
-const url = 'https://git.heroku.com/rocky-caverns-21242.git'
+const url = ' https://rocky-caverns-21242.herokuapp.com/'
 let loggedIn = 0
 let userId, token, plowId
 
