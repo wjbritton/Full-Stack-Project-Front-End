@@ -232,7 +232,6 @@ $('#delete').on('click', function () {
     },
     method: 'DELETE'
   })
-  // console.log(plowId)
 })
 
 $('#edit').on('click', function () {
@@ -265,7 +264,7 @@ $('#editPlowBtn').on('click', function () {
     contentType: 'application/json; charset=utf-8',
     type: 'PATCH',
     data: updatedPlow,
-    success: function (data, textStatus, jqXhr) {
+    success: function () {
       console.log('Successful Edit')
       $('#crudAdmin').addClass('hidden')
       $('#editPage').addClass('hidden')
