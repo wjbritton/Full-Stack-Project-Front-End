@@ -11,8 +11,8 @@ let userId, token, plowId
 
 $('#admin-register').on('click', function () {
   $('#landingPage').addClass('hidden')
-  $('#admin').removeClass('hidden')
   $('#actionBtn').addClass('hidden')
+  $('#admin').removeClass('hidden')
   $('#results').addClass('hidden')
 })
 
@@ -53,6 +53,7 @@ $('.search').on('click', function () {
   $('#results').addClass('hidden')
   $('#inputPlow').addClass('hidden')
   $('#passwordChange').addClass('hidden')
+  $('#editPage').addClass('hidden')
 })
 
 $('#add').on('click', function () {
@@ -78,12 +79,6 @@ $('#submitModelNum').on('click', function () {
   } else {
     $('.home').removeClass('hidden')
   }
-
-  const d = new Date()
-  let min = d.getMinutes()
-  if (min < 10) {
-    min += '0'
-  }
   $.ajax({
     type: 'GET',
     contentType: 'application/json; charset=utf-8',
@@ -92,11 +87,9 @@ $('#submitModelNum').on('click', function () {
     success: function (response, textStatus, jqXhr) {
       plowId = response.plow.id
       if (jqXhr.readyState === 4 && jqXhr.status === 200) {
-        const date = 'Date: ' + (1 + d.getMonth()) + '-' + d.getDate() + '-' + d.getFullYear() + '<br>' + 'Time: ' + d.getHours() + ':' + min
         $('#timeRun').html(response.plow.last_run_time)
         $('#year').html(response.plow.year_make)
         $('#model').html(response.plow.model)
-        $('#dateLogged').html(date)
         console.log('Registered')
         $('#results').removeClass('hidden')
         $('#landingPage').addClass('hidden')
@@ -240,24 +233,45 @@ $('#delete').on('click', function () {
   // console.log(plowId)
 })
 
-// $('#changePwBtn').on('click', function () {
-//   const inputOld = $('#oldPw').val()
-//   const inputNew = $('#newPw').val()
-//   const pwData = '{"passwords": {"old": "' + inputOld + '", "new": "' + inputNew + '"}}'
-//   console.log(pwData + ' ' + token)
-//   $('#oldPw').val('')
-//   $('#newPw').val('')
-//   $.ajax({
-//     url: 'http://localhost:4741/change-password/' + userId,
-//     headers: {Authorization: 'Token token=' + token},
-//     contentType: 'application/json; charset=utf-8',
-//     type: 'PATCH',
-//     data: pwData,
-//     success: function (data, textStatus, jqXhr) {
-//       console.log('success:   ' + data + ' ' + textStatus + ' ' + jqXhr)
-//     }
-//   })
-// })
+$('#edit').on('click', function () {
+  $.ajax({
+    type: 'GET',
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    url: 'http://localhost:4741/plows/' + plowId,
+    success: function (response, textStatus, jqXhr) {
+      plowId = response.plow.id
+      $('#timeRunEdit').val(response.plow.last_run_time)
+      $('#yearEdit').val(response.plow.year_make)
+      $('#modelEdit').val(response.plow.model)
+      $('#editPage').removeClass('hidden')
+      console.log('editGet!')
+      $('#results').addClass('hidden')
+      $('#actionBtn').addClass('hidden')
+    }
+  })
+})
+
+$('#editPlowBtn').on('click', function () {
+  const timeEdit = $('#timeRunEdit').val()
+  const yearEdit = $('#yearEdit').val()
+  const modelEdit = $('#modelEdit').val()
+  const updatedPlow = '{ "plows": { "last_run_time": "' + timeEdit + '", "year_make": "' + yearEdit + '", "model": ' + modelEdit + '}}'
+  $.ajax({
+    url: 'http://localhost:4741/plows/' + plowId,
+    headers: {Authorization: 'Token token=' + token},
+    contentType: 'application/json; charset=utf-8',
+    type: 'PATCH',
+    data: updatedPlow,
+    success: function (data, textStatus, jqXhr) {
+      console.log('Successful Edit')
+      $('#crudAdmin').addClass('hidden')
+      $('#editPage').addClass('hidden')
+      $('#landingPage').removeClass('hidden')
+      $('#addPlow').removeClass('hidden')
+    }
+  })
+})
 
 // $('#addPlow').on('click', function () {
 //   console.log('home click')
