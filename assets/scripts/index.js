@@ -5,7 +5,7 @@
 // Change password UI and ajax
 // Change plow UI and ajax
 // Delete Plow UI and ajax
-
+const url = 'http://localhost:4741'
 let loggedIn = 0
 let userId, token, plowId
 
@@ -83,7 +83,7 @@ $('#submitModelNum').on('click', function () {
     type: 'GET',
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
-    url: 'http://localhost:4741/plows/' + input,
+    url: url + '/plows/' + input,
     success: function (response, textStatus, jqXhr) {
       plowId = response.plow.id
       if (jqXhr.readyState === 4 && jqXhr.status === 200) {
@@ -113,7 +113,7 @@ $('#adminButton').on('click', function () {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: jsonData,
-    url: 'http://localhost:4741/sign-up',
+    url: url + '/sign-up',
     success: function () {
       $('#emailReg').val('')
       $('#passwordReg').val('')
@@ -134,7 +134,7 @@ $('#signIn').on('click', function () {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: jsonData,
-    url: 'http://localhost:4741/sign-in',
+    url: url + '/sign-in',
     success: function (data, textStatus, jqXhr) {
       $('#emailLog').val('')
       $('#passwordLog').val('')
@@ -163,7 +163,7 @@ $('#logOut').on('click', function () {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: jsonData,
-    url: 'http://localhost:4741/sign-out/' + userId,
+    url: url + '/sign-out/' + userId,
     headers: {
       Authorization: 'Token token=' + token
     },
@@ -188,7 +188,7 @@ $('#addPlowBtn').on('click', function () {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: plowData,
-    url: 'http://localhost:4741/plows/',
+    url: url + '/plows/',
     success: function (data, textStatus, jqXhr) {
       plowId = data.plow.id
       console.log(plowId + '  ' + textStatus + '  ' + JSON.stringify(jqXhr))
@@ -210,13 +210,15 @@ $('#changePwBtn').on('click', function () {
   $('#oldPw').val('')
   $('#newPw').val('')
   $.ajax({
-    url: 'http://localhost:4741/change-password/' + userId,
+    url: url + '/change-password/' + userId,
     headers: {Authorization: 'Token token=' + token},
     contentType: 'application/json; charset=utf-8',
     type: 'PATCH',
     data: pwData,
     success: function (data, textStatus, jqXhr) {
-      console.log('success:   ' + data + ' ' + textStatus + ' ' + jqXhr)
+      $('#passwordChange').addClass('hidden')
+      $('#landingPage').removeClass('hidden')
+      $('#addPlow').removeClass('hidden')
     }
   })
 })
@@ -224,7 +226,7 @@ $('#changePwBtn').on('click', function () {
 $('#delete').on('click', function () {
   console.log(JSON.stringify(plowId))
   $.ajax({
-    url: 'http://localhost:4741/plows/' + plowId,
+    url: url + '/plows/' + plowId,
     headers: {
       Authorization: 'Token token=' + token
     },
@@ -238,7 +240,7 @@ $('#edit').on('click', function () {
     type: 'GET',
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
-    url: 'http://localhost:4741/plows/' + plowId,
+    url: url + '/plows/' + plowId,
     success: function (response, textStatus, jqXhr) {
       plowId = response.plow.id
       $('#timeRunEdit').val(response.plow.last_run_time)
@@ -258,7 +260,7 @@ $('#editPlowBtn').on('click', function () {
   const modelEdit = $('#modelEdit').val()
   const updatedPlow = '{ "plows": { "last_run_time": "' + timeEdit + '", "year_make": "' + yearEdit + '", "model": ' + modelEdit + '}}'
   $.ajax({
-    url: 'http://localhost:4741/plows/' + plowId,
+    url: url + '/plows/' + plowId,
     headers: {Authorization: 'Token token=' + token},
     contentType: 'application/json; charset=utf-8',
     type: 'PATCH',
@@ -267,31 +269,6 @@ $('#editPlowBtn').on('click', function () {
       console.log('Successful Edit')
       $('#crudAdmin').addClass('hidden')
       $('#editPage').addClass('hidden')
-      $('#landingPage').removeClass('hidden')
-      $('#addPlow').removeClass('hidden')
     }
   })
 })
-
-// $('#addPlow').on('click', function () {
-//   console.log('home click')
-//   const timeInput = $('#timeAdd').val()
-//   const yearInput = $('#yearAdd').val()
-//   const modelInput = $('#modelAdd').val()
-//
-//   // "plows": {
-//   //     "last_run_time": "11:00:00",
-//   //     "year_make": "2014",
-//   //     "model": "SS-8-TE"
-//   //   }
-//
-//   const plowData = '{ "plows": { "last_run_time": "' + timeInput + '", "year_make": "' + yearInput + '", "model": "' + modelAdd + "}}'"
-//   console.log(plowData)
-//
-// })
-
-// use require with a reference to bundle the file and use it in this file
-// const example = require('./example')
-
-// use require without a reference to ensure a file is bundled
-// require('./example')
